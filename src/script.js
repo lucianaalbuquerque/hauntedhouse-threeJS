@@ -57,6 +57,25 @@ grassAOTexture.wrapT = THREE.RepeatWrapping
 grassNormalTexture.wrapT = THREE.RepeatWrapping
 grassRoughnessTexture.wrapT = THREE.RepeatWrapping
 
+const roofColorTexture = textureLoader.load('/textures/roof/RoofShinglesOld002_COL_2K_METALNESS.png')
+const roofAOTexture = textureLoader.load('/textures/roof/RoofShinglesOld002_AO_2K_METALNESS.png')
+const roofNormalTexture = textureLoader.load('/textures/roof/RoofShinglesOld002_NRM_2K_METALNESS.png')
+const roofRoughnessTexture = textureLoader.load('/textures/roof/RoofShinglesOld002_ROUGHNESS_2K_METALNESS.png')
+
+roofColorTexture.repeat.set(1.5, 1.5)
+roofAOTexture.repeat.set(1.5,1.5)
+roofNormalTexture.repeat.set(1.5,1.5)
+roofRoughnessTexture.repeat.set(1.5,1.5)
+
+roofColorTexture.wrapS = THREE.RepeatWrapping
+roofAOTexture.wrapS = THREE.RepeatWrapping
+roofNormalTexture.wrapS = THREE.RepeatWrapping
+roofRoughnessTexture.wrapS = THREE.RepeatWrapping
+
+roofColorTexture.wrapT = THREE.RepeatWrapping
+roofAOTexture.wrapT = THREE.RepeatWrapping
+roofNormalTexture.wrapT = THREE.RepeatWrapping
+roofRoughnessTexture.wrapT = THREE.RepeatWrapping
 /**
  * House
  */
@@ -80,7 +99,12 @@ house.add(walls);
 //roof
 const roof = new THREE.Mesh(
 	new THREE.ConeGeometry(3.5, 1, 4),
-	new THREE.MeshStandardMaterial({ color: '#b35f45' }),
+    new THREE.MeshStandardMaterial({
+        map: roofColorTexture,
+        aoMap: roofAOTexture,
+        roughnessMap: roofRoughnessTexture,
+        normalMap: roofNormalTexture,
+    }),
 );
 roof.rotation.y = Math.PI * 0.25;
 roof.position.y = 2.5 + 0.5;
@@ -106,7 +130,12 @@ house.add(door);
 
 //bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
-const bushMaterial = new THREE.MeshStandardMaterial({ color: '#89c854' })
+const bushMaterial = new THREE.MeshStandardMaterial({
+    map: grassColorTexture,
+    aoMap: grassAOTexture,
+    normalMap: grassNormalTexture,
+    roughnessMap: grassRoughnessTexture,
+})
 
 const bush1 = new THREE.Mesh(bushGeometry, bushMaterial)
 bush1.scale.set(0.5, 0.5, 0.5)
